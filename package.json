@@ -1,0 +1,38 @@
+{
+  "name": "esvm",
+  "version": "0.0.0",
+  "description": "Elasticsearch Version Manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simianhacker/esvm.git"
+  },
+  "keywords": [
+    "elasticsearch",
+    "version",
+    "manager",
+    "libesvm"
+  ],
+  "author": "Chris Cowan",
+  "license": "Apache",
+  "bugs": {
+    "url": "https://github.com/simianhacker/esvm/issues"
+  },
+  "homepage": "https://github.com/simianhacker/esvm",
+  "bin": {
+    "esvm": "./bin/esvm.js"
+  },
+  "dependencies": {
+    "cli-color": "^0.3.2",
+    "commander": "^2.3.0",
+    "libesvm": "0.0.4",
+    "lodash": "^2.4.1",
+    "moment": "^2.8.1",
+    "optimist": "^0.6.1",
+    "progress": "^1.1.8",
+    "rcloader": "^0.1.2"
+  }
+}
