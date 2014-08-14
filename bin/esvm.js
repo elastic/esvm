@@ -47,7 +47,7 @@ var options = {};
 // If the version is a named config use that otherwise
 // use the version as the actual version
 if (version) {
-	if (config.clusters[version]) {
+	if (config.clusters && config.clusters[version]) {
 		options = config.clusters[version];
 	} else if (commander.branch) {
 		delete defaults.version;
