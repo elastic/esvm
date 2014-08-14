@@ -19,7 +19,7 @@ Options:
   -p, --purge      purge the data directory
   -f, --fresh      preform a fresh install
   -b, --branch     install from a branch release
-  -n, --nodes <n>  the number of nodes to star
+  -n, --nodes <n>  the number of nodes to start
 ```
 
 Note: `<version>` can either be a semver expression of a named cluster (which is found in the configuration).
