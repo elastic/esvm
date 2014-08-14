@@ -10,7 +10,7 @@ var commander   = require('commander');
 var packageInfo = require('../package.json');
 
 var rcloader = new RcLoader('.esvmrc');
-var config = rcloader.for(process.cwd());
+var config = rcloader.for('.esvmrc');
 
 var defaults = _.defaults(config.defaults, {
   directory: process.env.HOME+'/.esvm',
