@@ -12,7 +12,7 @@ var packageInfo = require('../package.json');
 var rcloader = new RcLoader('.esvmrc');
 var config = rcloader.for('.esvmrc');
 
-var defaults = _.defaults(config.defaults, {
+var defaults = _.defaults(config.defaults || {}, {
   directory: process.env.HOME+'/.esvm',
   plugins: [],
   purge: false, // Purge the data directory
@@ -68,6 +68,7 @@ _.assign(options, _.pick(commander, ['fresh', 'nodes', 'purge']));
 
 // Set the defaults
 options = _.defaults(options, defaults);
+console.log('options', options);
 var cluster = libesvm.createCluster(options);
 
 // Setup the logging
