@@ -13,7 +13,6 @@ var rcloader = new RcLoader('.esvmrc');
 var config = rcloader.for(process.cwd());
 
 var defaults = _.defaults(config.defaults, {
-  version: '*',
   directory: process.env.HOME+'/.esvm',
   plugins: [],
   purge: false, // Purge the data directory
@@ -56,6 +55,12 @@ if (version) {
 	} else {
 		options = { version: version };
 	}
+}
+
+// If we don't have a version,  branch, and  binary then we need to set the version
+// to the latest.
+if (!options.version && !options.branch && !options.binary) {
+  options.version = '*';
 }
 
 // Assign the overrides from the CLI options
