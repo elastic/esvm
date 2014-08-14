@@ -68,7 +68,6 @@ _.assign(options, _.pick(commander, ['fresh', 'nodes', 'purge']));
 
 // Set the defaults
 options = _.defaults(options, defaults);
-console.log('options', options);
 var cluster = libesvm.createCluster(options);
 
 // Setup the logging
