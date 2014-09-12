@@ -1,0 +1,31 @@
+{
+  "defaults": {
+    "plugins": ["mobz/elasticsearch-head"]
+  },
+  "clusters": {
+    "2m3d": {
+      "nodes": [
+        {
+          "cluster": { "name": "2m3d" },
+          "node": { "name": "master-1", "data": false, "master": true }
+        },
+        {
+          "cluster": { "name": "2m3d" },
+          "node": { "name": "master-2", "data": false, "master": true }
+        },
+        {
+          "cluster": { "name": "2m3d" },
+          "node": { "name": "data-1", "data": true, "master": false }
+        },
+        {
+          "cluster": { "name": "2m3d" },
+          "node": { "name": "data-2", "data": true, "master": false }
+        },
+        {
+          "cluster": { "name": "2m3d" },
+          "node": { "name": "data-3", "data": true, "master": false }
+        }
+      ]
+    }
+  }
+}

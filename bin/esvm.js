@@ -6,22 +6,13 @@ var _           = require('lodash');
 var ProgressBar = require('progress');
 var RcLoader    = require('rcloader');
 var os          = require('os');
+var fs          = require('fs');
 var commander   = require('commander');
 var packageInfo = require('../package.json');
 
 var rcloader = new RcLoader('.esvmrc');
 var config = rcloader.for('.esvmrc');
 
-var defaults = _.defaults(config.defaults || {}, {
-  directory: process.env.HOME+'/.esvm',
-  plugins: [],
-  purge: false, // Purge the data directory
-  fresh: false, // Download a fresh copy
-  nodes: 1,
-  config: {
-    cluster: { name: os.hostname() }
-  }
-});
 
 var levels = {
   INFO: clc.green,
@@ -39,10 +30,34 @@ commander
 	.option('-f, --fresh', 'preform a fresh install')
 	.option('-b, --branch', 'install from a branch release')
 	.option('-n, --nodes <n>', 'the number of nodes to start', parseInt)
+	.option('-c, --config <file>', 'the config file to use')
+	.option('--cluster-name <name>', 'the cluster name to use')
 	.parse(process.argv);
 
 var version = commander.args[0];
 var options = {};
+
+
+// If a config is passed via command line use that instead of the rcfile
+if (commander.config) {
+  try {
+    config = JSON.parse(fs.readFileSync(commander.config));
+  } catch (e) {
+    console.log(clc.red("Falied to parse config file: " + commander.config), "\n", e.stack);
+    process.exit(1);
+  }
+}
+
+var defaults = _.defaults(config.defaults || {}, {
+  directory: process.env.HOME+'/.esvm',
+  plugins: [],
+  purge: false, // Purge the data directory
+  fresh: false, // Download a fresh copy
+  nodes: 1,
+  config: {
+    cluster: { name: os.hostname() }
+  }
+});
 
 // If the version is a named config use that otherwise
 // use the version as the actual version
@@ -51,7 +66,7 @@ if (version) {
 		options = config.clusters[version];
 	} else if (commander.branch) {
 		delete defaults.version;
-		options = { branch: version }
+		options = { branch: version };
 	} else {
 		options = { version: version };
 	}
@@ -63,11 +78,18 @@ if (!options.version && !options.branch && !options.binary) {
   options.version = '*';
 }
 
+
 // Assign the overrides from the CLI options
 _.assign(options, _.pick(commander, ['fresh', 'nodes', 'purge']));
 
 // Set the defaults
 options = _.defaults(options, defaults);
+
+// Override the cluster name
+if (commander.clusterName) {
+  options.clusterNameOverride = commander.clusterName;
+}
+
 var cluster = libesvm.createCluster(options);
 
 // Setup the logging
