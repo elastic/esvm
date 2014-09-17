@@ -9,10 +9,10 @@ var os          = require('os');
 var fs          = require('fs');
 var commander   = require('commander');
 var packageInfo = require('../package.json');
+var join        = require('path').join;
 
 var rcloader = new RcLoader('.esvmrc');
 var config = rcloader.for('.esvmrc');
-
 
 var levels = {
   INFO: clc.green,
@@ -72,18 +72,17 @@ if (version) {
 	}
 }
 
-// If we don't have a version,  branch, and  binary then we need to set the version
-// to the latest.
-if (!options.version && !options.branch && !options.binary) {
-  options.version = '*';
-}
-
-
 // Assign the overrides from the CLI options
 _.assign(options, _.pick(commander, ['fresh', 'nodes', 'purge']));
 
 // Set the defaults
 options = _.defaults(options, defaults);
+
+// If we don't have a version,  branch, and  binary then we need to set the version
+// to the latest.
+if (!options.version && !options.branch && !options.binary) {
+  options.version = '*';
+}
 
 // Override the cluster name
 if (commander.clusterName) {
