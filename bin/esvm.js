@@ -10,6 +10,9 @@ var fs          = require('fs');
 var commander   = require('commander');
 var packageInfo = require('../package.json');
 var join        = require('path').join;
+var flattenWith = require('../lib/flattenWith');
+var explodeBy   = require('../lib/explodeBy');
+var mergeConfig = require('../lib/mergeConfig');
 
 var rcloader = new RcLoader('.esvmrc');
 var config = rcloader.for('.esvmrc');
@@ -37,7 +40,6 @@ commander
 var version = commander.args[0];
 var options = {};
 
-
 // If a config is passed via command line use that instead of the rcfile
 if (commander.config) {
   try {
@@ -48,7 +50,7 @@ if (commander.config) {
   }
 }
 
-var defaults = _.defaults(config.defaults || {}, {
+var defaults = mergeConfig(config.defaults || {}, {
   directory: process.env.HOME+'/.esvm',
   plugins: [],
   purge: false, // Purge the data directory
@@ -76,7 +78,14 @@ if (version) {
 _.assign(options, _.pick(commander, ['fresh', 'nodes', 'purge']));
 
 // Set the defaults
-options = _.defaults(options, defaults);
+options = mergeConfig(options, defaults);
+
+// Merge configs with nodes
+if (_.isArray(options.nodes)) {
+  options.nodes = options.nodes.map(function (value) {
+    return mergeConfig(value, options.config);
+  });
+}
 
 // If we don't have a version,  branch, and  binary then we need to set the version
 // to the latest.
