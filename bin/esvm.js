@@ -100,6 +100,10 @@ if (commander.clusterName) {
 
 var cluster = libesvm.createCluster(options);
 
+cluster.on('error', function (log) {
+  // do nothing for now.
+});
+
 // Setup the logging
 cluster.on('log', function (log) {
   var bar, pattern;
