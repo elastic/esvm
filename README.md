@@ -29,7 +29,7 @@ Note: `<version>` can either be a semver expression of a named cluster (which is
 **esvm** will look for an .esvmrc file in the current working directory. If it doesn't find one there it will continue to walk up the directory tree until it does. There are two main sections for the configuration file:
 
 * `defaults` - The defaults to apply to every instance
-* `clusters` - The named clusters. [See example below](#example-esvm)
+* `clusters` - The named clusters. [See example below](#example-esvmrc)
 
 Both the defaults and named clusters will take the following options:
 
