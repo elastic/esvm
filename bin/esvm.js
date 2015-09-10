@@ -107,7 +107,7 @@ cluster.on('error', function (log) {
 // Setup the logging
 cluster.on('log', function (log) {
   var bar, pattern;
-  if (log.type === 'progress') {
+  if (log.type === 'progress' && process.stdout.isTTY) {
     pattern = log.op + ' [:bar] :percent :etas';
     bar = new ProgressBar(pattern, {
       complete: '=',
