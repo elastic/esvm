@@ -1,7 +1,7 @@
 esvm
 ====
 
-**Elasticsearch Version Manager** is a command line application used for development to manage different versions of Elasticsearch. It should not be used in production since it's probably a bad idea to wrap a process with Node.js. But never the less it's extremely useful if you need to develop against multiple versions of Elasticsearch (I'm looking at you Kibana team).
+**Elasticsearch Version Manager** is a command line application used for development to manage different versions of Elasticsearch. It should not be used in production since it's probably a bad idea to wrap a process with Node.js. But nevertheless it's extremely useful if you need to develop against multiple versions of Elasticsearch (I'm looking at you Kibana team).
 
 ## Installation
 ```
@@ -17,7 +17,7 @@ Options:
   -h, --help       output usage information
   -V, --version    output the version number
   -p, --purge      purge the data directory
-  -f, --fresh      preform a fresh install
+  -f, --fresh      perform a fresh install
   -b, --branch     install from a branch release
   -n, --nodes <n>  the number of nodes to start
 ```
@@ -45,7 +45,7 @@ Both the defaults and named clusters will take the following options:
 
 ### Example .esvmrc
 
-In the example below if you where run `esvm 2node`. It would apply the configuration from the `defaults` section to the `2node` cluster section. Then `esvm` would insatll the latest version of Elasticsearch with the Marvel plugin installed and start up 2 nodes.
+The example below is if you were to run `esvm 2node`. It would apply the configuration from the `defaults` section to the `2node` cluster section. Then `esvm` would insatll the latest version of Elasticsearch with the Marvel plugin installed and start up 2 nodes.
 
 ```json
 {
