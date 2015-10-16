@@ -57,7 +57,7 @@ var defaults = mergeConfig(config.defaults || {}, {
   fresh: false, // Download a fresh copy
   nodes: 1,
   config: {
-    cluster: { name: os.hostname() }
+    'cluster.name': os.hostname()
   }
 });
 
@@ -98,6 +98,8 @@ if (commander.clusterName) {
   options.clusterNameOverride = commander.clusterName;
 }
 
+
+options.config = options.config;
 var cluster = libesvm.createCluster(options);
 
 cluster.on('error', function (log) {
