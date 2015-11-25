@@ -17,7 +17,7 @@
     "libesvm"
   ],
   "author": "Chris Cowan",
-  "license": "Apache",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/simianhacker/esvm/issues"
   },
