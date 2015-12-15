@@ -13,6 +13,7 @@ var join        = require('path').join;
 var flattenWith = require('../lib/flattenWith');
 var explodeBy   = require('../lib/explodeBy');
 var mergeConfig = require('../lib/mergeConfig');
+var formatter   = require('../lib/formatClusters');
 
 var rcloader = new RcLoader('.esvmrc');
 var config = rcloader.for('.esvmrc');
@@ -34,11 +35,13 @@ commander
 	.option('-b, --branch', 'install from a branch release')
 	.option('-n, --nodes <n>', 'the number of nodes to start', parseInt)
 	.option('-c, --config <file>', 'the config file to use')
+	.option('-l, --list', 'list clusters in the config file')
 	.option('--cluster-name <name>', 'the cluster name to use')
 	.parse(process.argv);
 
 var version = commander.args[0];
 var options = {};
+
 
 // If a config is passed via command line use that instead of the rcfile
 if (commander.config) {
@@ -98,6 +101,11 @@ if (commander.clusterName) {
   options.clusterNameOverride = commander.clusterName;
 }
 
+// If given the list command and a config file, list clusters and exit
+if (commander.config && commander.list) {
+  console.log(formatter(config.clusters))
+  return;
+}
 
 options.config = options.config;
 var cluster = libesvm.createCluster(options);
