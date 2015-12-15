@@ -12,14 +12,17 @@ npm install esvm -g
 ```
 Usage: esvm [options] <version>
 
-Options:
+  Options:
 
-  -h, --help       output usage information
-  -V, --version    output the version number
-  -p, --purge      purge the data directory
-  -f, --fresh      perform a fresh install
-  -b, --branch     install from a branch release
-  -n, --nodes <n>  the number of nodes to start
+    -h, --help             output usage information
+    -V, --version          output the version number
+    -p, --purge            purge the data directory
+    -f, --fresh            preform a fresh install
+    -b, --branch           install from a branch release
+    -n, --nodes <n>        the number of nodes to start
+    -c, --config <file>    the config file to use
+    -l, --list             list clusters in the config file
+    --cluster-name <name>  the cluster name to use
 ```
 
 Note: `<version>` can either be a semver expression of a named cluster (which is found in the configuration).
