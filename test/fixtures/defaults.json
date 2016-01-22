@@ -1,0 +1,12 @@
+{
+  "config": {
+    "test.enable": false,
+    "test.hosts": ["localhost:9200"]
+  },
+  "cluster": {
+    "node": {
+      "name": "foo-bar",
+      ".index": ["something"]
+    }
+  }
+}

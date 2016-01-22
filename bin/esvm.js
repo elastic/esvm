@@ -10,8 +10,6 @@ var fs          = require('fs');
 var commander   = require('commander');
 var packageInfo = require('../package.json');
 var join        = require('path').join;
-var flattenWith = require('../lib/flattenWith');
-var explodeBy   = require('../lib/explodeBy');
 var mergeConfig = require('../lib/mergeConfig');
 var formatter   = require('../lib/formatClusters');
 
@@ -104,7 +102,7 @@ if (commander.clusterName) {
 // If given the list command and a config file, list clusters and exit
 if (commander.config && commander.list) {
   console.log(formatter(config.clusters))
-  return;
+  process.exit();
 }
 
 options.config = options.config;

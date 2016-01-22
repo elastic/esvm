@@ -1,0 +1,11 @@
+{
+  "config": {
+    "test.enable": true,
+    "example.foo.enable": true
+  },
+  "cluster": {
+    "node": {
+      "enable": true
+    }
+  }
+}
