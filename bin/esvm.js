@@ -102,7 +102,7 @@ if (commander.clusterName) {
 }
 
 // If given the list command and a config file, list clusters and exit
-if (commander.config && commander.list) {
+if (commander.list) {
   console.log(formatter(config.clusters))
   process.exit();
 }
