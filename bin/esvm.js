@@ -1,17 +1,19 @@
 #!/usr/bin/env node
-var libesvm     = require('libesvm');
-var clc         = require('cli-color');
-var moment      = require('moment');
-var _           = require('lodash');
-var ProgressBar = require('progress');
-var RcLoader    = require('rcloader');
-var os          = require('os');
-var fs          = require('fs');
-var commander   = require('commander');
-var packageInfo = require('../package.json');
-var join        = require('path').join;
-var mergeConfig = require('../lib/mergeConfig');
-var formatter   = require('../lib/formatClusters');
+var libesvm       = require('libesvm');
+var clc           = require('cli-color');
+var moment        = require('moment');
+var _             = require('lodash');
+var ProgressBar   = require('progress');
+var RcLoader      = require('rcloader');
+var os            = require('os');
+var fs            = require('fs');
+var commander     = require('commander');
+var packageInfo   = require('../package.json');
+var join          = require('path').join;
+var flattenConfig = require('../lib/flattenConfig');
+var flattenWith   = require('../lib/flattenWith');
+var mergeConfig   = require('../lib/mergeConfig');
+var formatter     = require('../lib/formatClusters');
 
 var rcloader = new RcLoader('.esvmrc');
 var config = rcloader.for('.esvmrc');
@@ -51,7 +53,7 @@ if (commander.config) {
   }
 }
 
-var defaults = mergeConfig(config.defaults || {}, {
+var defaults = mergeConfig(flattenConfig(config.defaults || {}), {
   directory: process.env.HOME+'/.esvm',
   plugins: [],
   purge: false, // Purge the data directory
@@ -66,7 +68,7 @@ var defaults = mergeConfig(config.defaults || {}, {
 // use the version as the actual version
 if (version) {
 	if (config.clusters && config.clusters[version]) {
-		options = config.clusters[version];
+		options = flattenConfig(config.clusters[version]);
 	} else if (commander.branch) {
 		delete defaults.version;
 		options = { branch: version };
@@ -84,7 +86,7 @@ options = mergeConfig(options, defaults);
 // Merge configs with nodes
 if (_.isArray(options.nodes)) {
   options.nodes = options.nodes.map(function (value) {
-    return mergeConfig(value, options.config);
+    return mergeConfig(flattenWith(value, '.'), options.config);
   });
 }
 
