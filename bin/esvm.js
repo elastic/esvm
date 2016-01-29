@@ -86,7 +86,7 @@ options = mergeConfig(options, defaults);
 // Merge configs with nodes
 if (_.isArray(options.nodes)) {
   options.nodes = options.nodes.map(function (value) {
-    return mergeConfig(flattenWith(value, '.'), options.config);
+    return _.defaults(flattenWith('.', value), options.config);
   });
 }
 
