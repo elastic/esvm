@@ -27,7 +27,7 @@ Run as `esvm sield`
           {
             "username": "user",
             "password": "notsecure",
-            "roles": ["kibana4", "marvel"]
+            "roles": ["kibana4", "marvel_user"]
           },
           {
             "username": "admin",
