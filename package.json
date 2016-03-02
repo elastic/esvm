@@ -1,6 +1,6 @@
 {
   "name": "esvm",
-  "version": "3.2.5",
+  "version": "3.2.6",
   "description": "Elasticsearch Version Manager",
   "main": "index.js",
   "scripts": {
