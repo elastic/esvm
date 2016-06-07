@@ -11,7 +11,7 @@ To load this configuration, run `esvm 2m3d`
 {
   "clusters": {
     "2m3d": {
-      "plugins": ["mobz/elasticsearch-head"]
+      "plugins": ["mobz/elasticsearch-head"],
       "nodes": [
         {
           "cluster": { "name": "2m3d" },
